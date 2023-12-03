@@ -22,6 +22,30 @@ if(isset($_POST['psub']))
   }
 }
 
+if(isset($_POST['buffalo1']))
+{
+  $id = $_POST['id'];
+  $parentId = $_POST['parentId'];
+  $breed = $_POST['breed'];
+  $sex = $_POST['sex'];
+  $color = $_POST['color'];
+  $offsprings = $_POST['offsprings'];
+  $milching = $_POST['milching']; 
+  $age = $_POST['age'];
+  $vaccination = $_POST['vaccination'];
+  $horns = $_POST['horn'];
+  $diseases = $_POST['diseases'];
+  $height = $_POST['height'];
+  $food = $_POST['food'];
+  // if($id!="" && $parentId!="" && $breed!="" && $sex!="" && $color!="" && $weight!="" && $age!="" && $vaccination!="" && $diseases!="" && $height!="" && $food!=""){
+  $sql = "insert into buffallo(id,parent_id,breed,sex,color,offsprings,milching,age,vaccination,horns,diseases,height,food,date_time) VALUES ('$id','$parentId','$breed','$sex','$color','$offsprings','$milching','$age','$vaccination','$horns','$diseases','$height','$food',current_timestamp());";
+  $data = mysqli_query($con,$sql);
+  if($data)
+  {
+    echo "<script>alert('Plant added successfully!');</script>";
+  }
+}
+
 if(isset($_POST['psub1']))
 {
   $pname=$_POST['pname'];
@@ -164,6 +188,13 @@ if(isset($_GET["generate_bill"])){
     <link rel="stylesheet" href="style.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- W3 css -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootst
+    rap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcT
+    NXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> 
+<!-- w3 css end -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -232,6 +263,13 @@ if(isset($_GET["generate_bill"])){
       <a class="list-group-item list-group-item-action" href="#list-settings1" id="list-pddoc-list"  role="tab" data-toggle="list" aria-controls="home">Delete Plant</a>
       <a class="list-group-item list-group-item-action" href="#list-settings2" id="list-madoc-list"  role="tab" data-toggle="list" aria-controls="home">Add Medicine</a>
       <a class="list-group-item list-group-item-action" href="#list-settings3" id="list-mddoc-list"  role="tab" data-toggle="list" aria-controls="home">Delete Medicine</a>
+      <a class="list-group-item list-group-item-action" href="#list-plant" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Add Cow</a>
+      <a class="list-group-item list-group-item-action" href="#list-plant" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Delete Cow</a>
+      <a class="list-group-item list-group-item-action" href="#buffalo" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Add Buffalo</a>
+      <a class="list-group-item list-group-item-action" href="#list-plant" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Delete Buffalo</a>
+      <a class="list-group-item list-group-item-action" href="#list-plant" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Add Sheep</a>
+      <a class="list-group-item list-group-item-action" href="#list-plant" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Delete Sheep</a>
+
       <a class="list-group-item list-group-item-action" href="#list-settings4" id="list-mtadoc-list"  role="tab" data-toggle="list" aria-controls="home">Add Method</a>
       <a class="list-group-item list-group-item-action" href="#list-settings5" id="list-mtddoc-list"  role="tab" data-toggle="list" aria-controls="home">Delete Method</a>
       <a class="list-group-item list-group-item-action" href="#list-bill" id="list-bill-list" role="tab" data-toggle="list" aria-controls="home">Bill</a>
@@ -565,7 +603,7 @@ if(isset($_GET["generate_bill"])){
           <div class="row">
                   <div class="col-md-4"><label>Plant ID:</label></div>
                   <div class="col-md-8"><input type="text"  class="form-control" name="pid" required></div><br><br>
-                   <div class="col-md-4"><label>Plant name:</label></div>
+                  <div class="col-md-4"><label>Plant name:</label></div>
                   <div class="col-md-8"><input type="text"  class="form-control" name="pname" required></div><br><br>
                   <div class="col-md-4"><label>Plant type:</label></div>
                   <div class="col-md-8"><input type="text"  class="form-control" name="ptype" required></div><br><br>
@@ -577,6 +615,201 @@ if(isset($_GET["generate_bill"])){
           <input type="submit" name="psub" value="Add Plant" class="btn btn-primary">
         </form>
       </div>
+
+      <div class="tab-pane fade" id="buffalo" role="tabpanel" aria-labelledby="list-settings-list">
+        <form class="form-group" method="post" action="emp-panel.php">
+          <div style="text-aligment=center"><p>ADD BUFFALO</p></div>
+          <div class="row">
+                  <div class="col-md-4"><label>Tag ID:</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="id" required></div><br><br>
+                  <div class="col-md-4"><label>Parent ID:</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="parentId" required></div><br><br>
+                  <div class="col-md-4"><label>Breed:</label></div>
+                  <select class="col-md-8" name="breed" id="Breed" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="Murrah">Murrah</option>
+                    <option value="Surti">Surti</option>
+                    <option value="Nili-Ravi">Nili-Ravi</option>
+                    <option value="Jaffarabadi">Jaffarabadi</option>
+                    <option value="Mehsana">Mehsana</option>
+                    <option value="Bhadawari">Bhadawari</option>
+                    <option value="Marathwada">Marathwada</option>
+                    <option value="Toda">Toda</option>
+                    <option value="Manda">Manda</option>
+                    <option value="Kundi">Kundi</option>
+                  </select><br>
+                  <div class="col-md-4"><label>Gender:</label></div>
+                  <select class="col-md-8" name="sex" id="Sex" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="Bull">Male(buffalo bull)</option>
+                    <option value="Buffallo">Female(buffalo cow.)</option>
+                    <option value="Others">Others</option>
+                  </select><br>
+                  <div class="col-md-4"><label>Color:</label></div>
+                  <select class="col-md-8" name="color" id="Color" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="White">White</option>
+                    <option value="Brown">Brown</option>
+                    <option value="Black">Black</option>
+                    <option value="Gray">Gray</option>
+                    <option value="Speckled">Speckled</option>
+                    <option value="Mixed Colors">Mixed Colors</option>
+                  </select><br>
+                  <div class="col-md-4"><label>No. of OffSpring:</label></div>
+                  <select class="col-md-8" name="offsprings" id="Offsprings" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                  </select><br>
+                  <div class="col-md-4"><label>Milching:</label></div>
+                  <select class="col-md-8" name="milching" id="Milching" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select><br>
+                  <div class="col-md-4"><label>Age:</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="age" required></div><br><br>
+                  <div class="col-md-4"><label>Vaccination:</label></div>
+                  <select class="col-md-8" name="vaccination" id="Vaccination" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select><br>
+                  <div class="col-md-4"><label>Horns:</label></div>
+                  <select class="col-md-8" name="horn" id="Horn" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select><br>
+                  <div class="col-md-4"><label>Diseases:</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="diseases" required></div><br><br>
+                  <div class="col-md-4"><label>Height(Feets):</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="height" required></div><br><br>
+                  <div class="col-md-4"><label>Food:</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="food" required></div><br><br>
+                </div>
+          <input type="submit" name="buffalo1" value="Add Buffalo" class="btn btn-primary">
+        </form>
+      </div>
+
+      <!-- <div class="forms">
+    <form action="" method="post" id="buffalo" class="w3-container w3-card-4 w3-margin-top w3-twothird w3-display-topmiddle" style="border-radius: 5px; background-color:white; ">
+        <br>
+        <p>
+            <label class="w3-text-grey">Tag Id</label>
+            <input class="w3-input w3-border" name="id" id="Id" type="text" style="border-radius: 5px" required="">
+        </p>
+        <p>
+            <label class="w3-text-grey">Parent Id</label>
+            <input class="w3-input w3-border" name="parentId" id="ParentId" type="text" style="border-radius: 5px" required="">
+        </p>
+        <p>
+            <label class="w3-text-grey">Breed</label>
+            <select class="w3-select w3-border" name="breed" id="Breed" style="border-radius: 5px" type="option">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="Murrah">Murrah</option>
+                <option value="Surti">Surti</option>
+                <option value="Nili-Ravi">Nili-Ravi</option>
+                <option value="Jaffarabadi">Jaffarabadi</option>
+                <option value="Mehsana">Mehsana</option>
+                <option value="Bhadawari">Bhadawari</option>
+                <option value="Marathwada">Marathwada</option>
+                <option value="Toda">Toda</option>
+                <option value="Manda">Manda</option>
+                <option value="Kundi">Kundi</option>
+              </select>
+        </p>
+        <p>
+            <label class="w3-text-grey">Gender</label>
+            <select class="w3-select w3-border" name="sex" id="Sex" style="border-radius: 5px" type="option">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="Bull">Male(buffalo bull)</option>
+                <option value="Buffallo">Female(buffalo cow.)</option>
+                <option value="Others">Others</option>
+              </select>
+        </p>
+        <p>
+            <label class="w3-text-grey">Color</label>
+            <select class="w3-select w3-border" name="color" id="Color" style="border-radius: 5px" type="option">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="White">White</option>
+                <option value="Brown">Brown</option>
+                <option value="Black">Black</option>
+                <option value="Gray">Gray</option>
+                <option value="Speckled">Speckled</option>
+                <option value="Mixed Colors">Mixed Colors</option>
+              </select>
+        </p>
+        <p>
+            <label class="w3-text-grey">No. of OffSpring</label>
+            <select class="w3-select w3-border" name="offsprings">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+              </select>
+        </p>
+        <p>
+            <label class="w3-text-grey">Milching</label>
+            <select class="w3-select w3-border" name="milching">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+        </p>
+        <p>
+            <label class="w3-text-grey">Age</label>
+            <input class="w3-input w3-border" name="age" id="Age" type="text" style="border-radius: 5px" required="">
+        </p>
+        <p>
+            <label class="w3-text-grey">Vaccination</label>
+            <select class="w3-select w3-border" name="vaccination" id="Vaccination" style="border-radius: 5px" type="option">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+        </p>
+        <p>
+            <label class="w3-text-grey">Horns</label>
+            <select class="w3-select w3-border" name="horn">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+        </p>
+        <p>
+            <label class="w3-text-grey">Diseases(specify, if any. Otherwise: No)</label>
+            <input class="w3-input w3-border" name="diseases" id="Diseases" type="text" style="border-radius: 5px" required="">
+        </p>
+        <p>
+            <label class="w3-text-grey">Height(Feets)</label>
+            <input class="w3-input w3-border" name="height" id="Height" type="text" style="border-radius: 5px" required="">
+        </p>
+        <p>
+            <label class="w3-text-grey">Food</label>
+            <input class="w3-input w3-border" name="food" id="Food" type="text" style="border-radius: 5px" required="">
+        </p>
+        <br>
+
+        <div class="forms" style="border-radius: 5px">
+       
+        <p><button  type="save" name="submit" class="w3-btn w3-padding w3-teal" style="width:120px; border-radius: 5px;  ">Save &nbsp;</button></p>
+        <p><button class="w3-btn w3-padding w3-teal" style="width:120px; border-radius: 5px;"><a href="buffallotable.php" class="text-light" style="text-decoration:none">View</a></button></p>
+        <input class="w3-btn w3-padding w3-teal" style="width:120px; border-radius: 5px;" type="reset">
+        </div>
+    </form>
+    </div> -->
+    
+
 
       <div class="tab-pane fade" id="list-settings1" role="tabpanel" aria-labelledby="list-settings1-list">
         <form class="form-group" method="post" action="emp-panel.php">
