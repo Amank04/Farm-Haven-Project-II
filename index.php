@@ -59,7 +59,7 @@ function checklen()
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item" style="margin-right: 40px;">
-            <a class="nav-link js-scroll-trigger" href="index.php" style="color: white;font-family: 'IBM Plex Sans', sans-serif;"><h6>HOME</h6></a>
+            <a class="nav-link js-scroll-trigger" href="./Farm-heaven-project/service.html" style="color: white;font-family: 'IBM Plex Sans', sans-serif;"><h6>HOME</h6></a>
           </li>
   
           <li class="nav-item" style="margin-right: 40px;">
