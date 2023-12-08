@@ -37,12 +37,86 @@ if(isset($_POST['buffalo1']))
   $diseases = $_POST['diseases'];
   $height = $_POST['height'];
   $food = $_POST['food'];
+  $pic = $_FILES["photo"];
+
+  $filename = $pic['name'];
+  $filepath = $pic['tmp_name'];
+  $fileerror = $pic['error'];
   // if($id!="" && $parentId!="" && $breed!="" && $sex!="" && $color!="" && $weight!="" && $age!="" && $vaccination!="" && $diseases!="" && $height!="" && $food!=""){
-  $sql = "insert into buffallo(id,parent_id,breed,sex,color,offsprings,milching,age,vaccination,horns,diseases,height,food,date_time) VALUES ('$id','$parentId','$breed','$sex','$color','$offsprings','$milching','$age','$vaccination','$horns','$diseases','$height','$food',current_timestamp());";
-  $data = mysqli_query($con,$sql);
+    if($fileerror == 0){
+      $destination = 'media/'.$filename;
+      move_uploaded_file($filepath,$destination);
+      $sql = "insert into buffallo(id,parent_id,breed,sex,color,offsprings,milching,age,vaccination,horns,diseases,height,food,img,date_time) VALUES ('$id','$parentId','$breed','$sex','$color','$offsprings','$milching','$age','$vaccination','$horns','$diseases','$height','$food',$destination,current_timestamp());";
+      $data = mysqli_query($con,$sql);
+  }
   if($data)
   {
-    echo "<script>alert('Plant added successfully!');</script>";
+    echo "<script>alert('Buffalo added successfully!');</script>";
+  }
+}
+
+if(isset($_POST['cow1']))
+{
+  $id = $_POST['id'];
+    $parentId = $_POST['parentId'];
+    $breed = $_POST['breed'];
+    $sex = $_POST['sex'];
+    $color = $_POST['color'];
+    $weight = $_POST['weight']; 
+    $age = $_POST['age'];
+    $vaccination = $_POST['vaccination'];
+    $diseases = $_POST['diseases'];
+    $height = $_POST['height'];
+    $food = $_POST['food'];
+    $pic = $_FILES["photo"];
+
+    $filename = $pic['name'];
+    $filepath = $pic['tmp_name'];
+    $fileerror = $pic['error'];
+
+    if($fileerror == 0){
+      $destination = 'media/'.$filename;
+      move_uploaded_file($filepath,$destination);
+      $sql = "insert into cow(id,parentId,breed,sex,color,weight,age,vaccination,diseases,height,food,img,datetime) VALUES ('$id','$parentId','$breed','$sex','$color','$weight','$age','$vaccination','$diseases','$height','$food','$destination',current_timestamp());";
+      $data = mysqli_query($con,$sql);
+  }
+  // if($id!="" && $parentId!="" && $breed!="" && $sex!="" && $color!="" && $weight!="" && $age!="" && $vaccination!="" && $diseases!="" && $height!="" && $food!=""){
+  if($data)
+  {
+    echo "<script>alert('Cow added successfully!');</script>";
+  }
+}
+
+if(isset($_POST['sheep1']))
+{
+  $id = $_POST['id'];
+    $parentId = $_POST['parentId'];
+    $breed = $_POST['breed'];
+    $sex = $_POST['sex'];
+    $color = $_POST['color'];
+    $offsprings = $_POST['offsprings'];
+    $age = $_POST['age'];
+    $vaccination = $_POST['vaccination'];
+    $diseases = $_POST['diseases'];
+    $height = $_POST['height'];
+    $weight = $_POST['weight']; 
+    $food = $_POST['food'];
+    $wool_type = $_POST['wool_type'];
+    $pic = $_FILES['photo'];
+
+    $filename = $pic['name'];
+    $filepath = $pic['tmp_name'];
+    $fileerror = $pic['error'];
+    if($fileerror == 0){
+      $destination = 'uploads/'.$filename;
+      echo'$destination';
+      move_uploaded_file($filepath,$destination);
+      $sql = "insert into sheep(id,parent_id,breed,sex,color,offsprings,age,vaccination,disease,height,weight,food,wool_type,img,date_time) VALUES ('$id','$parentId','$breed','$sex','$color','$offsprings','$age','$vaccination','$diseases','$height','$weight','$food','$wool_type','$destination',current_timestamp());";
+      $data = mysqli_query($con,$sql);
+  }
+  if($data)
+  {
+    echo "<script>alert('Sheep added successfully!');</script>";
   }
 }
 
@@ -162,7 +236,7 @@ if(isset($_GET["generate_bill"])){
 
   $content .= '
       <br/>
-      <h2 align ="center"> ADMT Farm Management</h2></br>
+      <h2 align ="center">FARM HAVEN</h2></br>
       <h3 align ="center"> Bill</h3>
       
 
@@ -179,7 +253,7 @@ if(isset($_GET["generate_bill"])){
 <html lang="en">
   <head>
 
-  <title>ADMT Farm Management</title>
+  <title>FARM HAVEN</title>
 	<link rel="shortcut icon" type="image/x-icon" href="logo.jpeg"/>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -187,8 +261,10 @@ if(isset($_GET["generate_bill"])){
     <link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
     <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <!-- W3 css -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootst
@@ -201,7 +277,7 @@ if(isset($_GET["generate_bill"])){
     
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-  <a class="navbar-brand" href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>ADMT Farm Management</a>
+  <a class="navbar-brand" href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>FARM HAVEN</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -257,17 +333,20 @@ if(isset($_GET["generate_bill"])){
     <div class="list-group" id="list-tab" role="tablist">
       <a class="list-group-item list-group-item-action active" href="#list-dash" role="tab" aria-controls="home" data-toggle="list">Dashboard</a>
       <a class="list-group-item list-group-item-action" href="#list-plant" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Plants</a>
+      <a class="list-group-item list-group-item-action" href="#buffalo-table" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Buffalo</a>
+      <a class="list-group-item list-group-item-action" href="#cow-table" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Cow</a>
+      <a class="list-group-item list-group-item-action" href="#sheep-table" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Sheep</a>
       <a class="list-group-item list-group-item-action" href="#list-med" id="list-med-list" role="tab" data-toggle="list" aria-controls="home">Medicine</a>
       <a class="list-group-item list-group-item-action" href="#list-method" id="list-method-list" role="tab" data-toggle="list" aria-controls="home">Methods</a>
       <a class="list-group-item list-group-item-action" href="#list-settings" id="list-padoc-list"  role="tab" data-toggle="list" aria-controls="home">Add Plant</a>
       <a class="list-group-item list-group-item-action" href="#list-settings1" id="list-pddoc-list"  role="tab" data-toggle="list" aria-controls="home">Delete Plant</a>
       <a class="list-group-item list-group-item-action" href="#list-settings2" id="list-madoc-list"  role="tab" data-toggle="list" aria-controls="home">Add Medicine</a>
       <a class="list-group-item list-group-item-action" href="#list-settings3" id="list-mddoc-list"  role="tab" data-toggle="list" aria-controls="home">Delete Medicine</a>
-      <a class="list-group-item list-group-item-action" href="#list-plant" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Add Cow</a>
+      <a class="list-group-item list-group-item-action" href="#cow" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Add Cow</a>
       <a class="list-group-item list-group-item-action" href="#list-plant" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Delete Cow</a>
       <a class="list-group-item list-group-item-action" href="#buffalo" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Add Buffalo</a>
       <a class="list-group-item list-group-item-action" href="#list-plant" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Delete Buffalo</a>
-      <a class="list-group-item list-group-item-action" href="#list-plant" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Add Sheep</a>
+      <a class="list-group-item list-group-item-action" href="#sheep" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Add Sheep</a>
       <a class="list-group-item list-group-item-action" href="#list-plant" id="list-plant-list" role="tab" data-toggle="list" aria-controls="home">Delete Sheep</a>
 
       <a class="list-group-item list-group-item-action" href="#list-settings4" id="list-mtadoc-list"  role="tab" data-toggle="list" aria-controls="home">Add Method</a>
@@ -432,6 +511,167 @@ if(isset($_GET["generate_bill"])){
                         <td><?php echo $row['plant_type'];?></td>
                         <td><?php echo $row['plant_desc'];?></td>
                         <td><?php echo $row['soil_type'];?></td>
+                        <td>
+                    </td>
+                   
+                      </tr></a>
+                    <?php } ?>
+                </tbody>
+              </table>
+        <br>
+      </div>
+
+      <div class="tab-pane fade" id="buffalo-table" role="tabpanel" aria-labelledby="list-plant-list">
+        
+              <table class="table table-hover">
+              <thead class="table-success">
+                <tr>
+                  <th scope="col">Tag Id</th>
+                  <th scope="col">Parent Id</th>
+                  <th scope="col">Breed</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">Color</th>
+                  <th scope="col">Offsprings</th>
+                  <th scope="col">Milching</th>
+                  <th scope="col">Age</th>
+                  <th scope="col">Vaccination</th>
+                  <th scope="col">Horns</th>
+                  <th scope="col">Diseases</th>
+                  <th scope="col">Height</th >
+                  <th scope="col">Feed</th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+                <tbody>
+                  <?php 
+                    $con=mysqli_connect("localhost","root","","fms");
+                    global $con;
+                    $query = "select * from buffallo;";
+                    $result = mysqli_query($con,$query);
+                    while ($row = mysqli_fetch_array($result)){
+                      ?>
+                      <tr>
+                        <td><?php echo $row['id'];?></td>
+                        <td><?php echo $row['parent_id'];?></td>
+                        <td><?php echo $row['breed'];?></td>
+                        <td><?php echo $row['sex'];?></td>
+                        <td><?php echo $row['color'];?></td>
+                        <td><?php echo $row['offsprings'];?></td>
+                        <td><?php echo $row['milching'];?></td>
+                        <td><?php echo $row['age'];?></td>
+                        <td><?php echo $row['vaccination'];?></td>
+                        <td><?php echo $row['horns'];?></td>
+                        <td><?php echo $row['diseases'];?></td>
+                        <td><?php echo $row['height'];?></td>
+                        <td><?php echo $row['food'];?></td>
+                        <td><img src="<?php echo $row['img'];?>" height="100" width="100"></td>
+                        <td>
+                    </td>
+                   
+                      </tr></a>
+                    <?php } ?>
+                </tbody>
+              </table>
+        <br>
+      </div>
+
+      <div class="tab-pane fade" id="cow-table" role="tabpanel" aria-labelledby="list-plant-list">
+        
+              <table class="table table-hover">
+              <thead class="table-success">
+                <tr>
+                  <th scope="col">Tag Id</th>
+                  <th scope="col">Parent Id</th>
+                  <th scope="col">Breed</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">Color</th>
+                  <th scope="col">Weight</th>
+                  <th scope="col">Age</th>
+                  <th scope="col">Vaccination</th>
+                  <th scope="col">Diseases</th>
+                  <th scope="col">Height</th>
+                  <th scope="col">Feed</th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+                <tbody>
+                  <?php 
+                    $con=mysqli_connect("localhost","root","","fms");
+                    global $con;
+                    $query = "select * from cow;";
+                    $result = mysqli_query($con,$query);
+                    while ($row = mysqli_fetch_array($result)){
+                      ?>
+                      <tr>
+                        <td><?php echo $row['id'];?></td>
+                        <td><?php echo $row['parentId'];?></td>
+                        <td><?php echo $row['breed'];?></td>
+                        <td><?php echo $row['sex'];?></td>
+                        <td><?php echo $row['color'];?></td>
+                        <td><?php echo $row['weight'];?></td>
+                        <td><?php echo $row['age'];?></td>
+                        <td><?php echo $row['vaccination'];?></td>
+                        <td><?php echo $row['diseases'];?></td>
+                        <td><?php echo $row['height'];?></td>
+                        <td><?php echo $row['food'];?></td>
+                        <td><img src="<?php echo $row['img'];?>" height="100" width="100"></td>
+                        <td>
+                    </td>
+                   
+                      </tr></a>
+                    <?php } ?>
+                </tbody>
+              </table>
+        <br>
+      </div>
+
+      <div class="tab-pane fade" id="sheep-table" role="tabpanel" aria-labelledby="list-plant-list">
+        
+              <table class="table table-hover">
+              <thead class="table-success">
+                <tr>
+                  <th scope="col">Tag Id</th>
+                  <th scope="col">Parent Id</th>
+                  <th scope="col">Breed</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">Color</th>
+                  <th scope="col">Offsprings</th>
+                  <th scope="col">Age</th>
+                  <th scope="col">Vaccination</th>
+                  <th scope="col">Disease</th>
+                  <th scope="col">Height</th >
+                  <th scope="col">Weight</th>
+                  <th scope="col">Feed</th>
+                  <th scope="col">Wool Type</th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+                <tbody>
+                  <?php 
+                    $con=mysqli_connect("localhost","root","","fms");
+                    global $con;
+                    $query = "select * from sheep;";
+                    $result = mysqli_query($con,$query);
+                    while ($row = mysqli_fetch_array($result)){
+                      ?>
+                      <tr>
+                        <td><?php echo $row['id'];?></td>
+                        <td><?php echo $row['parent_id'];?></td>
+                        <td><?php echo $row['breed'];?></td>
+                        <td><?php echo $row['sex'];?></td>
+                        <td><?php echo $row['color'];?></td>
+                        <td><?php echo $row['offsprings'];?></td>
+                        <td><?php echo $row['age'];?></td>
+                        <td><?php echo $row['vaccination'];?></td>
+                        <td><?php echo $row['disease'];?></td>
+                        <td><?php echo $row['height'];?></td>
+                        <td><?php echo $row['weight'];?></td>
+                        <td><?php echo $row['food'];?></td>
+                        <td><?php echo $row['wool_type'];?></td>
+                        <td><img src="<?php echo $row['img'];?>" height="100" width="100"></td>
                         <td>
                     </td>
                    
@@ -616,9 +856,178 @@ if(isset($_GET["generate_bill"])){
         </form>
       </div>
 
-      <div class="tab-pane fade" id="buffalo" role="tabpanel" aria-labelledby="list-settings-list">
-        <form class="form-group" method="post" action="emp-panel.php">
-          <div style="text-aligment=center"><p>ADD BUFFALO</p></div>
+      <div class="container tab-pane fade" id="buffalo" role="tabpanel" aria-labelledby="list-settings-list">
+        <form class="form-group" method="post" href="#buffalo" enctype="multipart/form-data">
+        <nav class="navbar navbar-light bg-primary rounded rounded-20">
+          <h3 class= "text-left">BUFFALO ENTRY FORM</h3>
+        </nav><br>
+          <div class="row">
+                  <div class="col-md-4"><label>Tag ID:</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="id" required></div><br><br>
+                  <div class="col-md-4"><label>Parent ID:</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="parentId" required></div><br><br>
+                  <div class="col-md-4"><label>Breed:</label></div>
+                  <select class="col-md-8" name="breed" id="Breed" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="Murrah">Murrah</option>
+                    <option value="Surti">Surti</option>
+                    <option value="Nili-Ravi">Nili-Ravi</option>
+                    <option value="Jaffarabadi">Jaffarabadi</option>
+                    <option value="Mehsana">Mehsana</option>
+                    <option value="Bhadawari">Bhadawari</option>
+                    <option value="Marathwada">Marathwada</option>
+                    <option value="Toda">Toda</option>
+                    <option value="Manda">Manda</option>
+                    <option value="Kundi">Kundi</option>
+                  </select><br>
+                  <div class="col-md-4"><label>Gender:</label></div>
+                  <select class="col-md-8" name="sex" id="Sex" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="Bull">Male(buffalo bull)</option>
+                    <option value="Buffalo">Female(buffalo cow.)</option>
+                    <option value="Others">Others</option>
+                  </select><br>
+                  <div class="col-md-4"><label>Color:</label></div>
+                  <select class="col-md-8" name="color" id="Color" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="White">White</option>
+                    <option value="Brown">Brown</option>
+                    <option value="Black">Black</option>
+                    <option value="Gray">Gray</option>
+                    <option value="Speckled">Speckled</option>
+                    <option value="Mixed Colors">Mixed Colors</option>
+                  </select><br>
+                  <div class="col-md-4"><label>No. of OffSpring:</label></div>
+                  <select class="col-md-8" name="offsprings" id="Offsprings" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                  </select><br>
+                  <div class="col-md-4"><label>Milching:</label></div>
+                  <select class="col-md-8" name="milching" id="Milching" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select><br>
+                  <div class="col-md-4"><label>Age:</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="age" required></div><br><br>
+                  <div class="col-md-4"><label>Vaccination:</label></div>
+                  <select class="col-md-8" name="vaccination" id="Vaccination" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select><br>
+                  <div class="col-md-4"><label>Horns:</label></div>
+                  <select class="col-md-8" name="horn" id="Horn" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select><br>
+                  <div class="col-md-4"><label>Diseases:</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="diseases" required></div><br><br>
+                  <div class="col-md-4"><label>Height(Feets):</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="height" required></div><br><br>
+                  <div class="col-md-4"><label>Food:</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="food" required></div><br><br>
+                  <div class="col-md-4"><label>Upload Buffalo Image:</label></div>
+                  <div class="col-md-8"><input type="file"  class="form-control" name="photo" accept="image/" value="" required></div><br><br>
+                </div>
+          <input type="submit" name="buffalo1" value="Add Buffalo" class="btn btn-primary">
+        </form>
+      </div>
+
+      <div class="container tab-pane fade" id="cow" role="tabpanel" aria-labelledby="list-settings-list">
+        <form autocomplete="off" class="form-group" method="post" action="emp-panel.php" enctype="multipart/form-data">
+        <nav class="navbar navbar-light bg-primary rounded rounded-20">
+          <h3 class= "text-left">COW ENTRY FORM</h3>
+        </nav><br>
+          <div class="row">
+                  <div class="col-md-4"><label>Tag ID:</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="id" required></div><br><br>
+                  <div class="col-md-4"><label>Parent ID:</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="parentId" required></div><br><br>
+                  <div class="col-md-4"><label>Breed:</label></div>
+                  <select class="col-md-8" name="breed" id="Breed" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="Jamunapari">Jamunapari</option>
+                    <option value="Sirohi">Sirohi</option>
+                    <option value="Boer">Boer</option>
+                    <option value="Beetal">Beetal</option>
+                    <option value="Osmanabadi">Osmanabadi</option>
+                    <option value="Black Bengal">Black Bengal</option>
+                    <option value="Barbari">Barbari</option>
+                    <option value="Malabari">Malabari</option>
+                    <option value="Kutchi">Kutchi</option>
+                    <option value="Marwari">Marwari</option>
+                  </select><br>
+                  <div class="col-md-4"><label>Gender:</label></div>
+                  <select class="col-md-8" name="sex" id="Sex" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="Male">Male(bucks)</option>
+                    <option value="Female">Female(nannies)</option>
+                    <option value="Others">Others</option>
+                  </select><br>
+                  <div class="col-md-4"><label>Color:</label></div>
+                  <select class="col-md-8" name="color" id="Color" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="White">White</option>
+                    <option value="Brown">Brown</option>
+                    <option value="Black">Black</option>
+                    <option value="Gray">Gray</option>
+                    <option value="Red">Red</option>
+                    <option value="Spots">Spots</option>
+                  </select><br>
+                  <div class="col-md-4"><label>Weight:</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="weight" required></div><br><br>
+                  <!-- <div class="col-md-4"><label>Milching:</label></div>
+                  <select class="col-md-8" name="milching" id="Milching" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select><br> -->
+                  <div class="col-md-4"><label>Age:</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="age" required></div><br><br>
+                  <div class="col-md-4"><label>Vaccination:</label></div>
+                  <select class="col-md-8" name="vaccination" id="Vaccination" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                  </select><br>
+                  <!-- <div class="col-md-4"><label>Horns:</label></div>
+                  <select class="col-md-8" name="horn" id="Horn" class="form-control" type="text" required>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select><br> -->
+                  <div class="col-md-4"><label>Diseases:</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="diseases" required></div><br><br>
+                  <div class="col-md-4"><label>Height(Feets):</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="height" required></div><br><br>
+                  <div class="col-md-4"><label>Food:</label></div>
+                  <div class="col-md-8"><input type="text"  class="form-control" name="food" required></div><br><br>
+                  <div class="col-md-4"><label>Upload Cow Image:</label></div>
+                  <div class="col-md-8"><input type="file"  class="form-control" name="photo" accept="image/" value="" required></div><br><br>
+                </div>
+          <input type="submit" name="cow1" value="Add Cow" class="btn btn-primary">
+        </form>
+      </div>
+
+      <div class="container tab-pane fade" id="sheep" role="tabpanel" aria-labelledby="list-settings-list">
+        <form class="form-group" method="post" action="emp-panel.php" enctype="multipart/form-data">
+        <nav class="navbar navbar-light bg-primary rounded rounded-20">
+          <h3 class= "text-left">SHEEP ENTRY FORM</h3>
+        </nav><br>
           <div class="row">
                   <div class="col-md-4"><label>Tag ID:</label></div>
                   <div class="col-md-8"><input type="text"  class="form-control" name="id" required></div><br><br>
@@ -692,10 +1101,13 @@ if(isset($_GET["generate_bill"])){
                   <div class="col-md-8"><input type="text"  class="form-control" name="height" required></div><br><br>
                   <div class="col-md-4"><label>Food:</label></div>
                   <div class="col-md-8"><input type="text"  class="form-control" name="food" required></div><br><br>
+                  <div class="col-md-4"><label>Upload Sheep Image:</label></div>
+                  <div class="col-md-8"><input type="file"  class="form-control" name="photo" accept="image/" value="" required></div><br><br>
                 </div>
-          <input type="submit" name="buffalo1" value="Add Buffalo" class="btn btn-primary">
+          <input type="submit" name="sheep1" value="Add Sheep" class="btn btn-primary">
         </form>
       </div>
+
 
       <!-- <div class="forms">
     <form action="" method="post" id="buffalo" class="w3-container w3-card-4 w3-margin-top w3-twothird w3-display-topmiddle" style="border-radius: 5px; background-color:white; ">

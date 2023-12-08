@@ -5,7 +5,7 @@ session_destroy();
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <title>ADMT Farm Management</title>
+  <title>FARM HAVEN</title>
 	<link rel="shortcut icon" type="image/x-icon" href="logo.jpeg"/>
 
     <!-- Required meta tags -->
